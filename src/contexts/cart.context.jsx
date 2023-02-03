@@ -22,11 +22,15 @@ const cartReducer = (state, action) => {
     const { type, payload } = action;
 
     switch (type) {
+        case "SET_CART_ITEMS":
+            return {
+                ...state,
+                ...payload
+            }
         default:
             throw new Error(`Unhandled type ${type} in cartReducer`);
     }
 };
-
 
 const addCartItem = (cartItems, itemToAdd) => {
     const existingItem = cartItems.find(item => item.id === itemToAdd.id);
@@ -73,6 +77,10 @@ export const CartProvider = ({ children }) => {
         const newCartTotal = cartItems.reduce((total, cartItem) => total + cartItem.quantity, 0);
         setCartCount(newCartTotal);
     }, [cartItems]);
+
+    const updateCartItemsReducer = (newCartItems) => {
+        //
+    }
 
     const addItemToCart = (itemToAdd) => {
         setCartItems(addCartItem(cartItems, itemToAdd));
