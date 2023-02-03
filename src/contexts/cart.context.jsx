@@ -11,6 +11,21 @@ export const CartContext = createContext({
     cartTotal: 0
 });
 
+const INITIAL_STATE = {
+    isCartOpen: false,
+    cartItems: [],
+    cartCount: 0,
+    cartTotal: 0
+};
+
+const cartReducer = (state, action) => {
+    const { type, payload } = action;
+
+    switch (type) {
+        default:
+            throw new Error(`Unhandled type ${type} in cartReducer`);
+    }
+};
 
 
 const addCartItem = (cartItems, itemToAdd) => {
