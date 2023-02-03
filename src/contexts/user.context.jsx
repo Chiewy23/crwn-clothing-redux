@@ -14,6 +14,8 @@ export const UserContext = createContext({
     setCurrentUser: () => null
 });
 
+
+
 const userReducer = (state, action) => {
     const { type, payload } = action;
 
@@ -28,7 +30,8 @@ const userReducer = (state, action) => {
     }
 };
 
-// Thw functional component.
+
+
 export const UserProvider = ({ children }) => {
     const [state, dispatch] = useReducer(userReducer, INITIAL_STATE);
 
