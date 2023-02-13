@@ -62,26 +62,26 @@ const clearCartItem = (cartItems, itemToClear) => {
 
 
 export const CartProvider = ({ children }) => {
-    const [isCartOpen, setIsCartOpen] = useState(false);
-    const [cartItems, setCartItems] = useState([]);
-    const [cartCount, setCartCount] = useState(0);
-    const [cartTotal, setCartTotal] = useState(0);
+    // const [isCartOpen, setIsCartOpen] = useState(false);
+    // const [cartItems, setCartItems] = useState([]);
+    // const [cartCount, setCartCount] = useState(0);
+    // const [cartTotal, setCartTotal] = useState(0);
 
-    useEffect(() => {
-        const newCartTotal = cartItems.reduce((total, cartItem) => total + (cartItem.quantity * cartItem.price), 0);
-        setCartTotal(newCartTotal);
-    }, [cartItems]);
+    // useEffect(() => {
+    //     const newCartTotal = cartItems.reduce((total, cartItem) => total + (cartItem.quantity * cartItem.price), 0);
+    //     setCartTotal(newCartTotal);
+    // }, [cartItems]);
 
-    useEffect(() => {
-        const newCartCount = cartItems.reduce((total, cartItem) => total + cartItem.quantity, 0);
-        setCartCount(newCartCount);
-    }, [cartItems]);
+    // useEffect(() => {
+    //     const newCartCount = cartItems.reduce((total, cartItem) => total + cartItem.quantity, 0);
+    //     setCartCount(newCartCount);
+    // }, [cartItems]);
 
     const updateCartItemsReducer = (newCartItems) => {
-        const newCartTotal = cartItems.reduce((total, cartItem) => total + (cartItem.quantity * cartItem.price), 0);
+        const newCartTotal = newCartItems.reduce((total, cartItem) => total + (cartItem.quantity * cartItem.price), 0);
         setCartTotal(newCartTotal);
 
-        const newCartCount = cartItems.reduce((total, cartItem) => total + cartItem.quantity, 0);
+        const newCartCount = newCartItems.reduce((total, cartItem) => total + cartItem.quantity, 0);
         setCartCount(newCartCount);
 
     }
