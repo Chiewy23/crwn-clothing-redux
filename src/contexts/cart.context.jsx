@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState, useReducer } from "react";
+import { createContext, useReducer } from "react";
 
 export const CartContext = createContext({
     isCartOpen: false,
@@ -62,28 +62,16 @@ const clearCartItem = (cartItems, itemToClear) => {
 
 
 export const CartProvider = ({ children }) => {
-    // const [isCartOpen, setIsCartOpen] = useState(false);
-    // const [cartItems, setCartItems] = useState([]);
-    // const [cartCount, setCartCount] = useState(0);
-    // const [cartTotal, setCartTotal] = useState(0);
 
-    // useEffect(() => {
-    //     const newCartTotal = cartItems.reduce((total, cartItem) => total + (cartItem.quantity * cartItem.price), 0);
-    //     setCartTotal(newCartTotal);
-    // }, [cartItems]);
-
-    // useEffect(() => {
-    //     const newCartCount = cartItems.reduce((total, cartItem) => total + cartItem.quantity, 0);
-    //     setCartCount(newCartCount);
-    // }, [cartItems]);
+    const [ state, dispatch ] = useReducer(cartReducer, INITIAL_STATE)
+    const { cartItems, cartCount, cartTotal } = state;
 
     const updateCartItemsReducer = (newCartItems) => {
         const newCartTotal = newCartItems.reduce((total, cartItem) => total + (cartItem.quantity * cartItem.price), 0);
-        setCartTotal(newCartTotal);
 
         const newCartCount = newCartItems.reduce((total, cartItem) => total + cartItem.quantity, 0);
-        setCartCount(newCartCount);
 
+        dispatch({ type: "SET_CART_ITEMS", payload: { cartItems: newCartItems, cartTotal: newCartTotal, cartCount: newCartCount } });
     }
 
     const addItemToCart = (itemToAdd) => {
