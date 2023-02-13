@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState, useReducer } from "react";
 
 export const CartContext = createContext({
     isCartOpen: false,
@@ -61,7 +61,6 @@ const clearCartItem = (cartItems, itemToClear) => {
 };
 
 
-
 export const CartProvider = ({ children }) => {
     const [isCartOpen, setIsCartOpen] = useState(false);
     const [cartItems, setCartItems] = useState([]);
@@ -79,19 +78,22 @@ export const CartProvider = ({ children }) => {
     }, [cartItems]);
 
     const updateCartItemsReducer = (newCartItems) => {
-        //
+        
     }
 
     const addItemToCart = (itemToAdd) => {
-        setCartItems(addCartItem(cartItems, itemToAdd));
+        const newCartItems = addCartItem(cartItems, itemToAdd);
+        updateCartItemsReducer(newCartItems);
     };
 
     const removeItemFromCart = (itemToRemove) => {
-        setCartItems(removeCartItem(cartItems, itemToRemove));
+        const newCartItems = removeCartItem(cartItems, itemToRemove);
+        updateCartItemsReducer(newCartItems);
     };
 
     const clearItemFromCart =(itemToClear) => {
-        setCartItems(clearCartItem(cartItems, itemToClear));
+        const newCartItems = clearCartItem(cartItems, itemToClear);
+        updateCartItemsReducer(newCartItems);
     };
 
     const value = {
