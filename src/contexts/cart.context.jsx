@@ -1,15 +1,5 @@
 import { createContext, useReducer } from "react";
 
-export const CartContext = createContext({
-    isCartOpen: false,
-    setIsCartOpen: () => {},
-    cartItems: [],
-    addItemToCart: () => {},
-    removeItemFromCart: () => {},
-    clearItemFromCart: () => {},
-    cartCount: 0,
-    cartTotal: 0
-});
 
 const addCartItem = (cartItems, itemToAdd) => {
     const existingItem = cartItems.find(item => item.id === itemToAdd.id);
@@ -70,10 +60,21 @@ const cartReducer = (state, action) => {
     }
 };
 
+export const CartContext = createContext({
+    isCartOpen: false,
+    setIsCartOpen: () => {},
+    cartItems: [],
+    addItemToCart: () => {},
+    removeItemFromCart: () => {},
+    clearItemFromCart: () => {},
+    cartCount: 0,
+    cartTotal: 0
+});
+
 export const CartProvider = ({ children }) => {
 
     const [ state, dispatch ] = useReducer(cartReducer, INITIAL_STATE)
-    const { cartItems, cartCount, cartTotal } = state;
+    const { cartItems, cartCount, cartTotal, isCartOpen } = state;
 
     const updateCartItemsReducer = (newCartItems) => {
         const newCartTotal = newCartItems.reduce((total, cartItem) => total + (cartItem.quantity * cartItem.price), 0);
