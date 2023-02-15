@@ -68,11 +68,17 @@ export const CartProvider = ({ children }) => {
 
     const updateCartItemsReducer = (newCartItems) => {
         const newCartTotal = newCartItems.reduce((total, cartItem) => total + (cartItem.quantity * cartItem.price), 0);
-
         const newCartCount = newCartItems.reduce((total, cartItem) => total + cartItem.quantity, 0);
 
-        dispatch({ type: "SET_CART_ITEMS", payload: { cartItems: newCartItems, cartTotal: newCartTotal, cartCount: newCartCount } });
-    }
+        dispatch({ 
+            type: "SET_CART_ITEMS",
+            payload: { 
+                cartItems: newCartItems, 
+                cartTotal: newCartTotal, 
+                cartCount: newCartCount 
+            } 
+        });
+    };
 
     const addItemToCart = (itemToAdd) => {
         const newCartItems = addCartItem(cartItems, itemToAdd);
@@ -87,6 +93,10 @@ export const CartProvider = ({ children }) => {
     const clearItemFromCart =(itemToClear) => {
         const newCartItems = clearCartItem(cartItems, itemToClear);
         updateCartItemsReducer(newCartItems);
+    };
+
+    const setIsCartOpen = (bool) => {
+        dispatch({ type: "SET_IS_CART_OPEN", payload: bool });
     };
 
     const value = {
