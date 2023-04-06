@@ -15,7 +15,7 @@ const middleWares = [
 const persistConfig = {
     key: "root",        // persist everything
     storage: storage,   // use browser localStorage
-    blacklist: ["user"]
+    whitelist: ["cart"]
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
