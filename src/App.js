@@ -24,7 +24,7 @@ const App = () => {
     });
 
       return unsubscribe;
-  }, [dispatch]); // In reality this doesn't change, this is just to remove linting warnings.
+  }, [dispatch]); // In reality dispatch doesn't change, this is just to remove linting warnings.
 
   return (
     <Routes>
